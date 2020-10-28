@@ -3,7 +3,7 @@ docker-compose up --build
 
 
 подсказки:
-docker exec -it bash 
+docker exec -it resttest bash
 su postgres
 psql
 docker inspect postgres-0

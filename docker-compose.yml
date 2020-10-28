@@ -10,6 +10,8 @@ services:
   myapp:
     build: services/myapp
     ports:
-      - "8888:8888"
+      - "8085:8080"
     depends_on:
       - postgres
+
+#docker-compose up --build
