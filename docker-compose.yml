@@ -1,0 +1,15 @@
+version: '3.6'
+services:
+  postgres:
+    build: services/postgre
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=password
+
+  myapp:
+    build: services/myapp
+    ports:
+      - "8888:8888"
+    depends_on:
+      - postgres
