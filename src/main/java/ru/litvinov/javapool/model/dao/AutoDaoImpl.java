@@ -33,11 +33,14 @@ public class AutoDaoImpl implements AutoDao{
     }
 
     @Override
-    public void removeAuto(int id) {
+    public String removeAuto(int id) {
         Session session = this.sessionFactory.getCurrentSession();
         Auto auto = session.load(Auto.class,id);
         if (auto != null){
             session.delete(auto);
+            return "Auto with id = " + id + " is deleted";
+        } else {
+            return null;
         }
     }
 

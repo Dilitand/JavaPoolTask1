@@ -1,10 +1,8 @@
 package ru.litvinov.javapool.service;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.litvinov.javapool.model.dao.AutoDao;
-import ru.litvinov.javapool.model.dao.AutoDaoImpl;
 import ru.litvinov.javapool.model.entity.Auto;
 
 import javax.transaction.Transactional;
@@ -32,8 +30,8 @@ public class AutoServiceImpl implements AutoService {
     }
 
     @Override
-    public void removeAuto(int id) {
-        autoDao.removeAuto(id);
+    public String removeAuto(int id) {
+       return autoDao.removeAuto(id);
     }
 
     @Override
