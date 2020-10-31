@@ -13,6 +13,9 @@ public class Main {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ConfigClass.class);
         AutoDao dao = context.getBean("autoDaoImpl", AutoDao.class);
 
+        System.out.println("123".matches("\\D+"));
+        System.out.println("12abc3".matches("\\D+"));
+
         /*
         List l = dao.listAuto();
         System.out.println(l);

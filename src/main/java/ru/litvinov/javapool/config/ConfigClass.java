@@ -30,7 +30,7 @@ public class ConfigClass {
         dataSource.setDriverClassName("org.postgresql.Driver");
         StringBuilder url = new StringBuilder("jdbc:postgresql://");
         dataSource.setUrl(url
-                //.append(environment.getProperty("url.localhostip"))
+                //.append(environment.getProperty("url.localhostip")).append(":").append(environment.getProperty("url.port"))
                 .append(environment.getProperty("url.containterip"))
                 .append("/").append(environment.getProperty("url.database")).toString());
         dataSource.setUsername(environment.getProperty("postgres.username2"));
