@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import ru.litvinov.javapool.exceptions.ResourceNotFoundException;
 import ru.litvinov.javapool.model.entity.Auto;
 import ru.litvinov.javapool.service.AutoService;
 
@@ -33,12 +34,7 @@ public class AppController {
 
     @GetMapping(value = "auto/listAutoByModel")
     public @ResponseBody List<Auto> listAutoByModel(@RequestParam String model){
-        List<Auto> result = autoService.listAutoByModel(model);
-        if (result == null || result.size() == 0) {
-            throw new ResourceNotFoundException();
-        } else {
-            return result;
-        }
+        return autoService.listAutoByModel(model);
     }
 
     @GetMapping(value = "auto/listAutoByParams")
@@ -125,8 +121,5 @@ public class AppController {
         return "test string";
     }
 
-    @ResponseStatus(value = HttpStatus.NOT_FOUND)
-    public final class ResourceNotFoundException extends RuntimeException {
-        //  class definition
-    }
+
 }

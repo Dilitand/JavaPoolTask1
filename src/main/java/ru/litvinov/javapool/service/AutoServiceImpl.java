@@ -2,6 +2,7 @@ package ru.litvinov.javapool.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.litvinov.javapool.exceptions.WrongInput;
 import ru.litvinov.javapool.model.dao.AutoDao;
 import ru.litvinov.javapool.model.entity.Auto;
 
@@ -21,11 +22,23 @@ public class AutoServiceImpl implements AutoService {
 
     @Override
     public int addAuto(Auto auto) {
+        if (auto.getMaxspeed() < 0) {
+            throw new WrongInput("max speed must be more than 0");
+        }
+        if (auto.getMileage() < 0) {
+            throw new WrongInput("mileage can`t be less 0");
+        }
         return autoDao.addAuto(auto);
     }
 
     @Override
     public void updateAuto(Auto auto) {
+        if (auto.getMaxspeed() < 0) {
+            throw new WrongInput("max speed must be more than 0");
+        }
+        if (auto.getMileage() < 0) {
+            throw new WrongInput("mileage can`t be less 0");
+        }
         autoDao.updateAuto(auto);
     }
 
