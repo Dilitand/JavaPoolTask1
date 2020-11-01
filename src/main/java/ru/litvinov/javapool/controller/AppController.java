@@ -1,7 +1,6 @@
 package ru.litvinov.javapool.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ru.litvinov.javapool.exceptions.ResourceNotFoundException;
@@ -28,7 +27,7 @@ public class AppController {
     }
 
     @GetMapping(value = "auto/listAuto")
-    public @ResponseBody List listAuto(){
+    public @ResponseBody List<Auto> listAuto(){
         return autoService.listAuto();
     }
 
