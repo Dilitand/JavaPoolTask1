@@ -2,6 +2,7 @@ package ru.litvinov.javapool.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.litvinov.javapool.exceptions.ResourceNotFoundException;
 import ru.litvinov.javapool.exceptions.WrongInput;
 import ru.litvinov.javapool.model.dao.AutoDao;
 import ru.litvinov.javapool.model.entity.Auto;
@@ -21,35 +22,58 @@ public class AutoServiceImpl implements AutoService {
     }
 
     @Override
-    public int addAuto(Auto auto) {
+    public String addAuto(Auto auto) {
         if (auto.getMaxspeed() < 0) {
             throw new WrongInput("max speed must be more than 0");
         }
         if (auto.getMileage() < 0) {
             throw new WrongInput("mileage can`t be less 0");
         }
-        return autoDao.addAuto(auto);
+
+        if(auto.getId() == 0){
+            int id = this.autoDao.addAuto(auto);
+            return "Auto with id = " + id + " was added" ;
+        } else {
+            this.autoDao.updateAuto(auto);
+            return "Auto is updated";
+        }
     }
 
     @Override
-    public void updateAuto(Auto auto) {
+    public String updateAuto(Auto auto) {
         if (auto.getMaxspeed() < 0) {
             throw new WrongInput("max speed must be more than 0");
         }
         if (auto.getMileage() < 0) {
             throw new WrongInput("mileage can`t be less 0");
         }
-        autoDao.updateAuto(auto);
+        Auto result = this.autoDao.getAutoById(auto.getId());
+        if (result == null) {
+            throw new ResourceNotFoundException();
+        } else {
+            this.autoDao.updateAuto(auto);
+            return "Auto is updated";
+        }
     }
 
     @Override
     public String removeAuto(int id) {
-       return autoDao.removeAuto(id);
+        String result = this.autoDao.removeAuto(id);
+        if (result == null){
+            throw new ResourceNotFoundException();
+        } else {
+            return result;
+        }
     }
 
     @Override
     public Auto getAutoById(int id) {
-        return autoDao.getAutoById(id);
+        Auto auto = this.autoDao.getAutoById(id);
+        if (auto == null){
+            throw new ResourceNotFoundException();
+        } else {
+            return auto;
+        }
     }
 
     @Override

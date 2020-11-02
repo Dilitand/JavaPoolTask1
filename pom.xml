@@ -206,13 +206,10 @@
                 <version>${version}</version>
                 <type>${packaging}</type>
                 <overWrite>true</overWrite>
-                <outputDirectory>alternateLocation</outputDirectory>
-                <destFileName>newFile.war</destFileName>
+                <outputDirectory>${project.build.directory}/services/myapp/</outputDirectory>
+                <destFileName>JavaPoolTask1.war</destFileName>
               </artifactItem>
             </artifactItems>
-            <outputDirectory>wars</outputDirectory>
-            <overWriteReleases>false</overWriteReleases>
-            <overWriteSnapshots>true</overWriteSnapshots>
           </configuration>
         </plugin>
 

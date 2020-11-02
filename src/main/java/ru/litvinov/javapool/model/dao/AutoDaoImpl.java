@@ -52,6 +52,7 @@ public class AutoDaoImpl implements AutoDao{
     public Auto getAutoById(int id) {
         Session session = sessionFactory.getCurrentSession();
         Auto auto = session.get(Auto.class, id);
+        session.clear();
         return auto;
     }
 

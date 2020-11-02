@@ -56,69 +56,32 @@ public class AppController {
 
     @RequestMapping(value = "auto/add",method = RequestMethod.POST)
     public @ResponseBody String addAuto(Auto auto) {
-        if(auto.getId() == 0){
-            int id = this.autoService.addAuto(auto);
-            return "Auto with id = " + id + " was added" ;
-        } else {
-            this.autoService.updateAuto(auto);
-            return "Auto is updated";
-        }
+        return this.autoService.addAuto(auto);
     }
 
     @RequestMapping(value = "auto/update",method = RequestMethod.POST)
     public @ResponseBody String updateAuto(Auto auto) {
-        Auto result =  autoService.getAutoById(auto.getId());
-        if(result == null){
-            throw new ResourceNotFoundException();
-        } else {
-            this.autoService.updateAuto(auto);
-            return "Auto is updated";
-        }
+        return this.autoService.updateAuto(auto);
     }
 
     @GetMapping(value = "auto/remove")
     public @ResponseBody String removeAuto(@RequestParam int id){
-        String result = autoService.removeAuto(id);
-        if (result == null){
-            throw new ResourceNotFoundException();
-        } else {
-            return result;
-        }
+        return this.autoService.removeAuto(id);
     }
 
     @GetMapping(value = "auto/getAuto")
     public @ResponseBody Auto getAuto(@RequestParam int id){
-        Auto auto = autoService.getAutoById(id);
-        if (auto == null){
-            throw new ResourceNotFoundException();
-        } else {
-            return auto;
-        }
+        return autoService.getAutoById(id);
     }
 
     @GetMapping(value = "auto/{idAuto}")
     public @ResponseBody Auto getAutoByVariable(@PathVariable int idAuto){
-           Auto result =  autoService.getAutoById(idAuto);
-           if(result == null) {
-               throw new ResourceNotFoundException();
-           } else {
-               return result;
-           }
+        return autoService.getAutoById(idAuto);
     }
-
-    @GetMapping(value = "auto/pagination")
-    public @ResponseBody List<Auto> pagination(@RequestParam int pageSize){
-        int currentPosition = 0;
-        List<Auto> list = autoService.pagination(currentPosition,pageSize);
-        currentPosition = currentPosition+pageSize;
-        return null;
-    }
-
 
     @GetMapping(value = "test")
     public @ResponseBody String test(){
         return "test string";
     }
-
 
 }
